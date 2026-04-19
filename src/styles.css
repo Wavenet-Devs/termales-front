@@ -1,0 +1,224 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Termales de Nuquí — Design System
+ * Paleta "Natural Pacífico": verdes selva, turquesa termal, arena cálida.
+ * Todos los colores en oklch. Nunca usar colores ad-hoc en componentes.
+ */
+
+@theme inline {
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-glow: var(--primary-glow);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-sand: var(--sand);
+  --color-sand-foreground: var(--sand-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Base — fondo claro arenoso muy sutil */
+  --background: oklch(0.985 0.006 145);
+  --foreground: oklch(0.22 0.04 175);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.04 175);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.04 175);
+
+  /* Primary — verde selva profundo */
+  --primary: oklch(0.42 0.09 175);
+  --primary-foreground: oklch(0.985 0.01 145);
+  --primary-glow: oklch(0.62 0.13 180);
+
+  /* Secondary — turquesa termal */
+  --secondary: oklch(0.93 0.04 195);
+  --secondary-foreground: oklch(0.32 0.08 195);
+
+  --muted: oklch(0.96 0.01 145);
+  --muted-foreground: oklch(0.5 0.03 175);
+
+  --accent: oklch(0.92 0.06 200);
+  --accent-foreground: oklch(0.3 0.08 195);
+
+  /* Sand — arena cálida para acentos */
+  --sand: oklch(0.93 0.05 75);
+  --sand-foreground: oklch(0.38 0.08 60);
+
+  --destructive: oklch(0.58 0.2 25);
+  --destructive-foreground: oklch(0.985 0.01 145);
+
+  --success: oklch(0.62 0.14 155);
+  --success-foreground: oklch(0.99 0.01 155);
+
+  --warning: oklch(0.78 0.15 75);
+  --warning-foreground: oklch(0.28 0.08 60);
+
+  --info: oklch(0.65 0.12 220);
+  --info-foreground: oklch(0.99 0.01 220);
+
+  --border: oklch(0.9 0.015 175);
+  --input: oklch(0.92 0.012 175);
+  --ring: oklch(0.5 0.1 180);
+
+  --chart-1: oklch(0.55 0.13 180);
+  --chart-2: oklch(0.65 0.14 155);
+  --chart-3: oklch(0.7 0.13 75);
+  --chart-4: oklch(0.6 0.12 220);
+  --chart-5: oklch(0.55 0.15 30);
+
+  /* Sidebar — verde selva profundo */
+  --sidebar: oklch(0.28 0.05 175);
+  --sidebar-foreground: oklch(0.92 0.02 145);
+  --sidebar-primary: oklch(0.62 0.13 180);
+  --sidebar-primary-foreground: oklch(0.15 0.03 175);
+  --sidebar-accent: oklch(0.34 0.06 175);
+  --sidebar-accent-foreground: oklch(0.97 0.015 145);
+  --sidebar-border: oklch(0.34 0.05 175);
+  --sidebar-ring: oklch(0.62 0.13 180);
+
+  /* Gradientes y sombras reutilizables */
+  --gradient-hero: linear-gradient(135deg, oklch(0.32 0.07 175) 0%, oklch(0.5 0.12 185) 60%, oklch(0.7 0.13 195) 100%);
+  --gradient-card: linear-gradient(135deg, oklch(0.99 0.01 145) 0%, oklch(0.96 0.03 190) 100%);
+  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-glow) 100%);
+  --shadow-elegant: 0 10px 30px -12px oklch(0.32 0.07 175 / 0.25);
+  --shadow-soft: 0 2px 8px -2px oklch(0.32 0.07 175 / 0.1);
+  --shadow-glow: 0 0 40px -8px oklch(0.62 0.13 180 / 0.45);
+}
+
+.dark {
+  --background: oklch(0.16 0.02 175);
+  --foreground: oklch(0.96 0.01 145);
+  --card: oklch(0.22 0.03 175);
+  --card-foreground: oklch(0.96 0.01 145);
+  --popover: oklch(0.22 0.03 175);
+  --popover-foreground: oklch(0.96 0.01 145);
+  --primary: oklch(0.7 0.13 185);
+  --primary-foreground: oklch(0.18 0.03 175);
+  --primary-glow: oklch(0.78 0.13 190);
+  --secondary: oklch(0.28 0.05 195);
+  --secondary-foreground: oklch(0.96 0.02 145);
+  --muted: oklch(0.26 0.03 175);
+  --muted-foreground: oklch(0.7 0.02 175);
+  --accent: oklch(0.32 0.06 195);
+  --accent-foreground: oklch(0.96 0.01 145);
+  --sand: oklch(0.5 0.08 75);
+  --sand-foreground: oklch(0.96 0.02 75);
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(0.98 0.01 145);
+  --success: oklch(0.7 0.14 155);
+  --success-foreground: oklch(0.15 0.03 155);
+  --warning: oklch(0.8 0.15 75);
+  --warning-foreground: oklch(0.18 0.05 60);
+  --info: oklch(0.72 0.12 220);
+  --info-foreground: oklch(0.15 0.03 220);
+  --border: oklch(1 0 0 / 0.1);
+  --input: oklch(1 0 0 / 0.15);
+  --ring: oklch(0.7 0.13 185);
+  --chart-1: oklch(0.7 0.13 185);
+  --chart-2: oklch(0.72 0.14 155);
+  --chart-3: oklch(0.78 0.13 75);
+  --chart-4: oklch(0.72 0.12 220);
+  --chart-5: oklch(0.7 0.15 30);
+  --sidebar: oklch(0.18 0.03 175);
+  --sidebar-foreground: oklch(0.92 0.02 145);
+  --sidebar-primary: oklch(0.7 0.13 185);
+  --sidebar-primary-foreground: oklch(0.18 0.03 175);
+  --sidebar-accent: oklch(0.24 0.04 175);
+  --sidebar-accent-foreground: oklch(0.96 0.01 145);
+  --sidebar-border: oklch(1 0 0 / 0.08);
+  --sidebar-ring: oklch(0.7 0.13 185);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Utilidades de gradiente disponibles como clases */
+@utility bg-gradient-hero {
+  background: var(--gradient-hero);
+}
+@utility bg-gradient-card {
+  background: var(--gradient-card);
+}
+@utility bg-gradient-primary {
+  background: var(--gradient-primary);
+}
+@utility shadow-elegant {
+  box-shadow: var(--shadow-elegant);
+}
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
