@@ -101,7 +101,7 @@ function SuccessPage() {
     </div>
     <div class="footer">
       <div class="footer-left">Generado el ${generated}</div>
-      <div class="footer-right">termales.nuquí.co</div>
+      <div class="footer-right">Creado por <a href="https://wavenetdevs-web.vercel.app/" style="color:rgba(255,255,255,0.9);text-decoration:underline;">Wavenet Dev</a></div>
     </div>
   </div>
   <script>window.onload = () => { window.print(); }<\/script>
