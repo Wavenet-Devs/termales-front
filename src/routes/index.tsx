@@ -235,7 +235,18 @@ function LandingPage() {
       <footer className="border-t bg-card/40 py-8">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 text-sm text-muted-foreground sm:flex-row sm:px-6 lg:px-8">
           <BrandMark />
-          <p>© {new Date().getFullYear()} Termales de Nuquí · Pacífico colombiano</p>
+          <p className="text-center text-xs">
+            © {new Date().getFullYear()} Termales de Nuquí ·{" "}
+            <a
+              href="https://wavenetdevs-web.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-medium text-foreground hover:text-primary transition-colors"
+            >
+              <img src="/logo-wavenet.png" alt="Wavenet Dev" className="h-4 w-auto" />
+              Creado por Wavenet Dev
+            </a>
+          </p>
         </div>
       </footer>
     </div>
