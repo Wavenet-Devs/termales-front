@@ -98,7 +98,15 @@ function PreRegisterPage() {
       companionsCount: values.companionsCount ?? 0,
     });
     toast.success("¡Prerregistro creado!", { description: `Código ${visit.code}` });
-    navigate({ to: "/preregistro/exito", search: { code: visit.code } });
+    navigate({
+      to: "/preregistro/exito",
+      search: {
+        code: visit.code,
+        date: new Date(visit.visitDate).toLocaleDateString("es-CO", { weekday: "long", year: "numeric", month: "long", day: "numeric" }),
+        name: `${values.firstName} ${values.lastName}`,
+        type: selectedType?.name ?? "",
+      },
+    });
   };
 
   return (
