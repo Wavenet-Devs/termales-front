@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Loader2, UserPlus } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { PageHeader } from "@/components/common/page-header";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -38,6 +39,9 @@ const schema = z.object({
   amount: z.coerce.number().min(0),
   paymentMethod: z.enum(["efectivo", "transferencia", "tarjeta", "otro"]),
   notes: z.string().optional(),
+  dataTreatment: z.boolean().refine((v) => v === true, {
+    message: "Confirma que el visitante autorizó el tratamiento de datos.",
+  }),
 });
 type FormValues = z.infer<typeof schema>;
 
@@ -64,6 +68,7 @@ function ManualRegisterPage() {
       companionsCount: 0,
       amount: defaultType?.price ?? 0,
       paymentMethod: "efectivo",
+      dataTreatment: false,
     },
     mode: "onBlur",
   });
@@ -228,10 +233,39 @@ function ManualRegisterPage() {
                 </label>
               ))}
             </div>
+            <div className="mt-4 space-y-1.5">
+              <div className="flex items-start gap-2">
+                <Checkbox
+                  id="dataTreatmentAdmin"
+                  checked={form.watch("dataTreatment")}
+                  onCheckedChange={(v) =>
+                    form.setValue("dataTreatment", v === true, { shouldValidate: true })
+                  }
+                  className="mt-0.5"
+                />
+                <label htmlFor="dataTreatmentAdmin" className="cursor-pointer text-xs leading-snug text-muted-foreground">
+                  El visitante autorizó el tratamiento de sus datos conforme a la{" "}
+                  <Link
+                    to="/politica-de-datos"
+                    target="_blank"
+                    className="font-medium text-primary underline underline-offset-2"
+                  >
+                    Política de Datos
+                  </Link>{" "}
+                  (Ley 1581/2012).
+                </label>
+              </div>
+              {form.formState.errors.dataTreatment && (
+                <p className="text-xs text-destructive pl-6">
+                  {form.formState.errors.dataTreatment.message}
+                </p>
+              )}
+            </div>
+
             <Button
               type="submit"
               size="lg"
-              className="mt-5 w-full"
+              className="mt-4 w-full"
               disabled={manualVisit.isPending}
             >
               {manualVisit.isPending ? (

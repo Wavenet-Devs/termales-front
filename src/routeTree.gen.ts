@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PoliticaDeDatosRouteImport } from './routes/politica-de-datos'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
@@ -24,6 +25,11 @@ import { Route as AdminCheckInRouteImport } from './routes/admin.check-in'
 import { Route as AdminVisitantesIndexRouteImport } from './routes/admin.visitantes.index'
 import { Route as AdminVisitantesVisitIdRouteImport } from './routes/admin.visitantes.$visitId'
 
+const PoliticaDeDatosRoute = PoliticaDeDatosRouteImport.update({
+  id: '/politica-de-datos',
+  path: '/politica-de-datos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
+  '/politica-de-datos': typeof PoliticaDeDatosRoute
   '/admin/check-in': typeof AdminCheckInRoute
   '/admin/configuracion': typeof AdminConfiguracionRoute
   '/admin/pagos': typeof AdminPagosRoute
@@ -114,6 +121,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/politica-de-datos': typeof PoliticaDeDatosRoute
   '/admin/check-in': typeof AdminCheckInRoute
   '/admin/configuracion': typeof AdminConfiguracionRoute
   '/admin/pagos': typeof AdminPagosRoute
@@ -131,6 +139,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
+  '/politica-de-datos': typeof PoliticaDeDatosRoute
   '/admin/check-in': typeof AdminCheckInRoute
   '/admin/configuracion': typeof AdminConfiguracionRoute
   '/admin/pagos': typeof AdminPagosRoute
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/login'
+    | '/politica-de-datos'
     | '/admin/check-in'
     | '/admin/configuracion'
     | '/admin/pagos'
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
+    | '/politica-de-datos'
     | '/admin/check-in'
     | '/admin/configuracion'
     | '/admin/pagos'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/login'
+    | '/politica-de-datos'
     | '/admin/check-in'
     | '/admin/configuracion'
     | '/admin/pagos'
@@ -197,12 +209,20 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   LoginRoute: typeof LoginRoute
+  PoliticaDeDatosRoute: typeof PoliticaDeDatosRoute
   PreregistroExitoRoute: typeof PreregistroExitoRoute
   PreregistroIndexRoute: typeof PreregistroIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/politica-de-datos': {
+      id: '/politica-de-datos'
+      path: '/politica-de-datos'
+      fullPath: '/politica-de-datos'
+      preLoaderRoute: typeof PoliticaDeDatosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -334,6 +354,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   LoginRoute: LoginRoute,
+  PoliticaDeDatosRoute: PoliticaDeDatosRoute,
   PreregistroExitoRoute: PreregistroExitoRoute,
   PreregistroIndexRoute: PreregistroIndexRoute,
 }

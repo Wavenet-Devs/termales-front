@@ -6,6 +6,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { BrandMark } from "@/components/common/brand-mark";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -43,6 +44,9 @@ const schema = z.object({
   visitDate: z.string().min(1, "Selecciona una fecha"),
   companionsCount: z.coerce.number().int().min(0).max(20).optional(),
   notes: z.string().max(300).optional(),
+  dataTreatment: z.boolean().refine((v) => v === true, {
+    message: "Debes aceptar la política de tratamiento de datos para continuar.",
+  }),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -74,6 +78,7 @@ function PreRegisterPage() {
       country: "Colombia",
       visitDate: today,
       companionsCount: 0,
+      dataTreatment: false,
     },
     mode: "onBlur",
   });
@@ -230,6 +235,35 @@ function PreRegisterPage() {
               <li>· El pago se realiza presencialmente al llegar.</li>
               <li>· Presenta tu documento físico para validar el ingreso.</li>
             </ul>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-start gap-3">
+              <Checkbox
+                id="dataTreatment"
+                checked={form.watch("dataTreatment")}
+                onCheckedChange={(v) =>
+                  form.setValue("dataTreatment", v === true, { shouldValidate: true })
+                }
+                className="mt-0.5"
+              />
+              <label htmlFor="dataTreatment" className="cursor-pointer text-sm leading-snug text-muted-foreground">
+                Autorizo el tratamiento de mis datos personales conforme a la{" "}
+                <Link
+                  to="/politica-de-datos"
+                  target="_blank"
+                  className="font-medium text-primary underline underline-offset-2 hover:text-primary/80"
+                >
+                  Política de Tratamiento de Datos Personales
+                </Link>{" "}
+                de Termales de Nuquí, de acuerdo con la Ley 1581 de 2012.
+              </label>
+            </div>
+            {form.formState.errors.dataTreatment && (
+              <p className="text-xs text-destructive pl-7">
+                {form.formState.errors.dataTreatment.message}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:justify-end">
