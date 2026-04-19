@@ -55,7 +55,8 @@ function SuccessPage() {
     .instruction-text { font-size: 13px; color: #444; line-height: 1.5; }
     .footer { background: #1a5c3a; padding: 14px 32px; display: flex; justify-content: space-between; align-items: center; }
     .footer-left { color: rgba(255,255,255,0.6); font-size: 10px; }
-    .footer-right { color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 600; }
+    .footer-right { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 600; }
+    .footer-logo { height: 22px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.9; }
     @media print {
       body { background: white; padding: 0; }
       .ticket { box-shadow: none; width: 100%; border-radius: 0; }
@@ -101,7 +102,10 @@ function SuccessPage() {
     </div>
     <div class="footer">
       <div class="footer-left">Generado el ${generated}</div>
-      <div class="footer-right">Creado por <a href="https://wavenetdevs-web.vercel.app/" style="color:rgba(255,255,255,0.9);text-decoration:underline;">Wavenet Dev</a></div>
+      <div class="footer-right">
+        <img src="${window.location.origin}/logo-wavenet.png" alt="Wavenet Dev" class="footer-logo" />
+        <a href="https://wavenetdevs-web.vercel.app/" style="color:rgba(255,255,255,0.9);text-decoration:underline;">Wavenet Dev</a>
+      </div>
     </div>
   </div>
   <script>window.onload = () => { window.print(); }<\/script>
